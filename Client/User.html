@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket User Client</title>
+</head>
+
+<body>
+    <h1>WebSocket User Client</h1>
+    <div id="status">Connecting to server...</div>
+    <div id="messages"></div>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:8080/log/');
+        const element = document.getElementById("messages");
+        const status = document.getElementById("status");
+
+        socket.onmessage = (event) =>
+        {
+            element.textContent += event.data + "\n"
+        }
+
+        socket.onopen = () =>
+        {
+            status.textContent = "Connected to server";
+        }
+
+        socket.onclose = () =>
+        {
+            status.textContent = "Connection to server closed";
+        }
+
+    </script>
+</body>
+</html>
